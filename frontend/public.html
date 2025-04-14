@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Link Viewer</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #fff; text-align: center; }
+    a { font-size: 20px; padding: 15px 30px; background: #28a745; color: white; text-decoration: none; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h2>🔗 Visit the Latest Link</h2>
+  <a id="visitBtn" href="#" target="_blank">Loading...</a>
+
+  <script>
+    const API_URL = 'https://your-backend.onrender.com/api/link';
+
+    async function fetchLink() {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      const btn = document.getElementById('visitBtn');
+      btn.href = data.url || '#';
+      btn.innerText = data.url ? "Go to Link" : "No Link Set";
+    }
+
+    fetchLink();
+  </script>
+</body>
+</html>

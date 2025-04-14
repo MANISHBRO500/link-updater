@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Link</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #f0f0f0; }
+    input, button { padding: 10px; margin-top: 10px; width: 100%; }
+  </style>
+</head>
+<body>
+  <h2>🔗 Update Link</h2>
+  <input type="text" id="linkInput" placeholder="Enter new link..." />
+  <button onclick="updateLink()">Update</button>
+  <p id="status"></p>
+
+  <script>
+    const API_URL = 'https://your-backend.onrender.com/api/link';
+
+    async function updateLink() {
+      const link = document.getElementById('linkInput').value;
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: link })
+      });
+      const data = await res.json();
+      document.getElementById('status').innerText = '✅ Link updated to: ' + data.url;
+    }
+  </script>
+</body>
+</html>
